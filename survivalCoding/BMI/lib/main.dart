@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
- 
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -14,8 +14,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
 
 class BmiMain extends StatefulWidget {
   @override
@@ -37,69 +35,71 @@ class _BmiMainState extends State<BmiMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('비만도 계산기'),),
-      body: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                decoration: InputDecoration( // 외각선이 있고 힌트로 '키'를 표시
-                  border: OutlineInputBorder(),
-                  hintText: '키',
-                ),
-                controller: _heightController,
-                keyboardType: TextInputType.number,
-                validator: (value){
-                  if(value.trim().isEmpty) { // 입력한 값의 앞뒤 공백을 제거한 것이 비었다면 에러 메시지 표시 
-                    return '키를 입력하세요';
-                  }
-                },
-              ),
-
-              SizedBox(height: 16.0,),
-              
-              TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: '몸무게',
-                ),
-                controller: _weightController,
-                keyboardType: TextInputType.number,
-                validator: (value) {
-                  if(value.trim().isEmpty) {
-                    return '몸무게를 입력하세요';
-                  }
-                },
-              ),
-              
-              Container(
-                // color: Colors.black,
-                margin: const EdgeInsets.only(top: 16.0),
-                alignment: Alignment.centerRight,
-                child: RaisedButton(
-                  onPressed: () {
-                    if(_formKey.currentState.validate()) {
-                      Navigator.push(
-                        context, 
-                        MaterialPageRoute(
-                          builder: (context) => BmiResult(
-                            double.parse(_heightController.text.trim()),
-                            double.parse(_weightController.text.trim()),
-                          )
-                        )
-                      );
+        appBar: AppBar(
+          title: Text('비만도 계산기'),
+        ),
+        body: Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  decoration: InputDecoration(
+                    // 외각선이 있고 힌트로 '키'를 표시
+                    border: OutlineInputBorder(),
+                    hintText: '키',
+                  ),
+                  controller: _heightController,
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value.trim().isEmpty) {
+                      // 입력한 값의 앞뒤 공백을 제거한 것이 비었다면 에러 메시지 표시
+                      return '키를 입력하세요';
                     }
                   },
-                  child: Text('결과'),
                 ),
-              )
-            ],
+                SizedBox(
+                  height: 16.0,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: '몸무게',
+                  ),
+                  controller: _weightController,
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value.trim().isEmpty) {
+                      return '몸무게를 입력하세요';
+                    }
+                  },
+                ),
+                Container(
+                  // color: Colors.black,
+                  margin: const EdgeInsets.only(top: 16.0),
+                  alignment: Alignment.centerRight,
+                  child: RaisedButton(
+                    onPressed: () {
+                      if (_formKey.currentState.validate()) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BmiResult(
+                                      double.parse(
+                                          _heightController.text.trim()),
+                                      double.parse(
+                                          _weightController.text.trim()),
+                                    )));
+                      }
+                    },
+                    child: Text('결과'),
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }
 
@@ -111,9 +111,9 @@ class BmiResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double bmi =  weight / ((height / 100) * (height / 100));
+    final double bmi = weight / ((height / 100) * (height / 100));
     print('bmi : $bmi');
-  
+
     return Scaffold(
       appBar: AppBar(title: Text('비만도 계산기')),
       body: Center(
@@ -124,7 +124,9 @@ class BmiResult extends StatelessWidget {
               _calcBmi(bmi),
               style: TextStyle(fontSize: 36),
             ),
-            SizedBox(height: 16,),
+            SizedBox(
+              height: 16,
+            ),
             _BuildIcon(bmi)
           ],
         ),
@@ -134,38 +136,27 @@ class BmiResult extends StatelessWidget {
 }
 
 Widget _BuildIcon(double bmi) {
-  if(bmi >= 23) {
-    return Icon(
-      Icons.sentiment_very_dissatisfied,
-      color: Colors.red,
-      size:100
-    );
-  }else if( bmi >= 18.5 ){
-    return Icon(
-      Icons.sentiment_very_satisfied,
-      color:Colors.green,
-      size: 100
-    );
-  }else {
-    return Icon(
-      Icons.sentiment_dissatisfied,
-      color: Colors.green,
-      size: 100
-    );
+  if (bmi >= 23) {
+    return Icon(Icons.sentiment_very_dissatisfied,
+        color: Colors.red, size: 100);
+  } else if (bmi >= 18.5) {
+    return Icon(Icons.sentiment_very_satisfied, color: Colors.green, size: 100);
+  } else {
+    return Icon(Icons.sentiment_dissatisfied, color: Colors.green, size: 100);
   }
 }
 
 String _calcBmi(double bmi) {
-  var result  = '저체중';
-  if(bmi >= 35) {
+  var result = '저체중';
+  if (bmi >= 35) {
     result = '고도 비만';
-  }else if ( bmi >= 30) {
+  } else if (bmi >= 30) {
     result = '2단계 비만';
-  }else if ( bmi >= 25) {
+  } else if (bmi >= 25) {
     result = '1단계 비만';
-  }else if ( bmi >= 23) {
+  } else if (bmi >= 23) {
     result = '과체중';
-  }else if ( bmi >= 18.5) {
+  } else if (bmi >= 18.5) {
     result = '정상';
   }
 
