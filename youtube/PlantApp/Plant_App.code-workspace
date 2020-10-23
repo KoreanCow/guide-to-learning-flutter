@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"dart.flutterSdkPath": "/Users/koreancow/Documents/flutter"
+	}
+}
