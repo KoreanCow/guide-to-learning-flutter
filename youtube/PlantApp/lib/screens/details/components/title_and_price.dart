@@ -17,7 +17,8 @@ class TitleAndPrice extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        Padding(padding: EdgeInsets.symmetric(horizontal: kDefaultPadding)),
+        Padding(padding: EdgeInsets.only(left: kDefaultPadding)),
+        // Padding(padding: EdgeInsets.symmetric(horizontal: kDefaultPadding)),
         RichText(
           text: TextSpan(children: [
             TextSpan(
@@ -42,7 +43,8 @@ class TitleAndPrice extends StatelessWidget {
               .textTheme
               .headline5
               .copyWith(color: kPrimaryColor),
-        )
+        ),
+        Padding(padding: EdgeInsets.only(right: kDefaultPadding)),
       ],
     );
   }
