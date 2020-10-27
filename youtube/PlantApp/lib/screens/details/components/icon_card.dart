@@ -17,8 +17,8 @@ class IconCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: size.height * 0.03),
       padding: EdgeInsets.all(kDefaultPadding / 2),
-      height: 62,
-      width: 62,
+      height: size.height / 13,
+      width: size.width / 6,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(6),
